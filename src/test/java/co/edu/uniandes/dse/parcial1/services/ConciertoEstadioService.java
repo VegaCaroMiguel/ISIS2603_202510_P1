@@ -36,13 +36,14 @@ public class ConciertoEstadioService {
 			throw new EntityNotFoundException(ErrorMessage.ESTADIO_NOT_FOUND);
 
 		conciertoEntity.get().setEstadio(estadioEntity.get());
-		log.info("Termina proceso de actualizar concierto con id = {0}", conciertoId);
+		log.info("Termina proceso de actualizar libro con id = {0}", conciertoId);
 
 		return conciertoEntity.get();
 	}
 
+
 	@Transactional
-	public void removeEstadii(Long conciertoId) throws EntityNotFoundException {
+	public void removeEstadio(Long conciertoId) throws EntityNotFoundException {
 		log.info("Inicia proceso de borrar el Estadio del Concierto con id = {0}", conciertoId);
 		Optional<ConciertoEntity> conciertoEntity = conciertoRepository.findById(conciertoId);
 		if (conciertoEntity.isEmpty())
@@ -53,6 +54,6 @@ public class ConciertoEstadioService {
 		estadioEntity.ifPresent(estadio -> estadio.getConciertos().remove(conciertoEntity.get()));
 
 		conciertoEntity.get().setEstadio(null);
-		log.info("Termina proceso de borrar el Estadio  del concierto con id = {0}", conciertoId);
+		log.info("Termina proceso de borrar el Estadio del concierto con id = {0}", conciertoId);
 	}
 }
